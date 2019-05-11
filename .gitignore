@@ -1,0 +1,9 @@
+.idea/
+
+out/
+Config.java
+.DS_Store
+target/
+DomovoyCloud/dependency-reduced-pom.xml
+
+Dacha.iml
