@@ -1,7 +1,7 @@
 .idea/
 
 out/
-Config.java
+config.properties
 .DS_Store
 target/
 DomovoyCloud/dependency-reduced-pom.xml
