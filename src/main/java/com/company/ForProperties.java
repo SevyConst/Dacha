@@ -7,10 +7,10 @@ import java.util.Properties;
 
 public class ForProperties {
 
-    public String ip;
-    public int port;
+    String ip;
+    int port;
 
-    public boolean loadProperties() {
+    boolean loadProperties() {
 
         // Properties file path.
         String filePath="src/main/resources/config.properties";
@@ -31,7 +31,7 @@ public class ForProperties {
             System.out.println("ip = " + ip);
             System.out.println("Port = " + port);
 
-        }catch(IOException ex){
+        } catch(IOException ex){
             System.out.println("Problem occurs when reading file !");
             ex.printStackTrace();
             return false;

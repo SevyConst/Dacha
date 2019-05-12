@@ -7,6 +7,8 @@ public class Main {
         if (!config.loadProperties()) {
             return;
         }
+
+        Client client = new Client(config.ip, config.port);
         System.out.println("Done!");
     }
 }
