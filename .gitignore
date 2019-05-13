@@ -7,3 +7,5 @@ target/
 DomovoyCloud/dependency-reduced-pom.xml
 
 Dacha.iml
+Client.iml
+Server.iml
