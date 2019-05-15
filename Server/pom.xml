@@ -55,6 +55,9 @@
                                     <shadedPattern>org.telegram.telegrambots.meta:*</shadedPattern>
                                     <shadedPattern>org.telegram.telegrambots.bots:*</shadedPattern>
                                     <shadedPattern>org.telegram.telegrambots.meta.exceptions.TelegramApiException</shadedPattern>
+                                    <shadedPattern>org.telegram.telegrambots.meta.api.methods.send.SendMessage</shadedPattern>
+                                    <shadedPattern>org.telegram.telegrambots.meta.api.objects.Update</shadedPattern>
+                                    <shadedPattern>org.telegram.telegrambots.bots.TelegramLongPollingBot</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

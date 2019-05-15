@@ -61,10 +61,17 @@ public class CheckDate implements Runnable {
 
                 if (limitExceeded) {
                     if (!warningSent) {
-                        String str =
+
+                        String str = "Проверка: соединение разорвано!" +
+                                "Ниже некоторая служебная информация";
+                        NotifyUtils.toBoth(str, bot);
+                        formatAndSendTwoDates(currentDate);
+
+                        str =
                                 "CheckDate: The limit has been exceeded";
                         NotifyUtils.toBoth(str, bot);
                         formatAndSendTwoDates(currentDate);
+                        
                         warningSent = true;
                     }
                 } else {

@@ -33,7 +33,9 @@ class MyTelegramBot extends TelegramLongPollingBot {
                 return false;
             }
         } else {
-            sendOneMessage(chatId, "ты уже был добавлен!");
+            if (received.equals(ForProperties.botPassword)) {
+                sendOneMessage(chatId, "ты уже был добавлен!");
+            }
         }
         return true;
     }
