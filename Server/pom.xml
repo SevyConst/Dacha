@@ -5,6 +5,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>4.2</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -28,6 +36,34 @@
                     </archive>
                 </configuration>
             </plugin>
+
+<!--            <plugin>-->
+<!--                &lt;!&ndash;package the artifact with dependencies in the one jar&ndash;&gt;-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <version>4.2</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <relocations>-->
+<!--                                <relocation>-->
+<!--                                    <pattern>org.telegram.telegrambots</pattern>-->
+<!--                                    <shadedPattern>org.telegram.telegrambots.api:*</shadedPattern>-->
+<!--                                    <shadedPattern>org.telegram.telegrambots.bots:*</shadedPattern>-->
+<!--                                    <shadedPattern>org.telegram.telegrambots.ApiContextInitializer</shadedPattern>-->
+<!--                                    <shadedPattern>org.telegram.telegrambots.bots.TelegramLongPollingBot</shadedPattern>-->
+<!--                                    <shadedPattern>org.telegram.telegrambots.TelegramBotsApi</shadedPattern>-->
+<!--                                    <shadedPattern>org.telegram.telegrambots.exceptions.TelegramApiRequestException</shadedPattern>-->
+<!--                                </relocation>-->
+<!--                            </relocations>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
         </plugins>
     </build>

@@ -6,8 +6,9 @@ import java.util.Properties;
 
 public class ForProperties {
 
-    String ip;
-    int port;
+    static int port;
+    static String botToken;
+    static String botPassword;
 
     boolean loadProperties() {
 
@@ -17,12 +18,12 @@ public class ForProperties {
         //---------------------------------------------------------------------
 
         // for ide
-        String filePath = "Client/src/main/resources/config.properties";
+        String filePath = "Server/src/main/resources/config.properties";
 
         // for jar
         //String filePath = "../src/main/resources/config.properties";
 
-        Properties prop=new Properties();
+        Properties prop = new Properties();
 
         //---------------------------------------------------------------------
 
@@ -36,14 +37,10 @@ public class ForProperties {
 
 
             // Getting properties
-            ip = prop.getProperty("ip");
+            botToken = prop.getProperty("BotToken");
+            botPassword = prop.getProperty("BotPassword");
             port = Integer.parseInt(prop.getProperty("Port"));
 
-            // !!!
-            ip = "localhost";
-
-
-            System.out.println("ip = " + ip);
             System.out.println("Port = " + port);
 
         } catch(IOException ex){
