@@ -20,7 +20,7 @@ public class CheckDate implements Runnable {
 
     public static volatile Date dateLastConnect;
 
-    private Date dateNextToLastConnect;
+    private static volatile Date dateNextToLastConnect;
 
     private MyTelegramBot bot;
 
@@ -49,6 +49,7 @@ public class CheckDate implements Runnable {
             if (currentDate.getTime() < dateLastConnect.getTime()) {
                 bot.sendToAll("" +
                         "currentDate.getTime() < dateLastConnect.getTime()");
+                formatAndSendTwoDates(new Date());
 
             } else {
                 int sleepMilliSec = 1000 * sleepSec;
@@ -63,12 +64,13 @@ public class CheckDate implements Runnable {
                         String str =
                                 "CheckDate: The limit has been exceeded";
                         NotifyUtils.toBoth(str, bot);
+                        formatAndSendTwoDates(currentDate);
                         warningSent = true;
                     }
                 } else {
                     if (warningSent) {
                         String str =
-                                "CheckDate: connection recovered!";
+                                "Проверка: соединение восстановленно!";
                         NotifyUtils.toBoth(str, bot);
                         warningSent = false;
                     }
@@ -82,6 +84,7 @@ public class CheckDate implements Runnable {
         } catch (InterruptedException e){
             String outStr = "CheckDate: Exception while sleeping";
             NotifyUtils.toBoth(outStr, bot);
+            formatAndSendTwoDates(new Date());
         }
     }
 

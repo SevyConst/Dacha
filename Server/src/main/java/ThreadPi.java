@@ -127,6 +127,8 @@ class ThreadPi implements Runnable{
                 return;
             }
         }
+        NotifyUtils.toBoth("Соединение разорвано", bot);
+        NotifyUtils.toBoth("Некоторая информация об разрыве соединения:", bot);
         NotifyUtils.toBoth("null from pi has been received", bot);
 
         try {
