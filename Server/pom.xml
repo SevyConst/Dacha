@@ -37,33 +37,30 @@
                 </configuration>
             </plugin>
 
-<!--            <plugin>-->
-<!--                &lt;!&ndash;package the artifact with dependencies in the one jar&ndash;&gt;-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-shade-plugin</artifactId>-->
-<!--                <version>4.2</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>shade</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <relocations>-->
-<!--                                <relocation>-->
-<!--                                    <pattern>org.telegram.telegrambots</pattern>-->
-<!--                                    <shadedPattern>org.telegram.telegrambots.api:*</shadedPattern>-->
-<!--                                    <shadedPattern>org.telegram.telegrambots.bots:*</shadedPattern>-->
-<!--                                    <shadedPattern>org.telegram.telegrambots.ApiContextInitializer</shadedPattern>-->
-<!--                                    <shadedPattern>org.telegram.telegrambots.bots.TelegramLongPollingBot</shadedPattern>-->
-<!--                                    <shadedPattern>org.telegram.telegrambots.TelegramBotsApi</shadedPattern>-->
-<!--                                    <shadedPattern>org.telegram.telegrambots.exceptions.TelegramApiRequestException</shadedPattern>-->
-<!--                                </relocation>-->
-<!--                            </relocations>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <plugin>
+                <!--package the artifact with dependencies in the one jar-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.telegram.telegrambots</pattern>
+                                    <shadedPattern>org.telegram.telegrambots.meta:*</shadedPattern>
+                                    <shadedPattern>org.telegram.telegrambots.bots:*</shadedPattern>
+                                    <shadedPattern>org.telegram.telegrambots.meta.exceptions.TelegramApiException</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>

@@ -18,10 +18,10 @@ public class ForProperties {
         //---------------------------------------------------------------------
 
         // for ide
-        String filePath = "Server/src/main/resources/config.properties";
+        //String filePath = "Server/src/main/resources/config.properties";
 
         // for jar
-        //String filePath = "../src/main/resources/config.properties";
+        String filePath = "../src/main/resources/config.properties";
 
         Properties prop = new Properties();
 
