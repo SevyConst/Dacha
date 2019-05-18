@@ -40,7 +40,7 @@ public class ForProperties {
             port = Integer.parseInt(prop.getProperty("Port"));
 
             // !!!
-            ip = "localhost";
+            //ip = "localhost";
 
 
             System.out.println("ip = " + ip);

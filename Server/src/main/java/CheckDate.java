@@ -70,7 +70,6 @@ public class CheckDate implements Runnable {
                         str =
                                 "CheckDate: The limit has been exceeded";
                         NotifyUtils.toBoth(str, bot);
-                        formatAndSendTwoDates(currentDate);
                         
                         warningSent = true;
                     }
