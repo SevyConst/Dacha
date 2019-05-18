@@ -17,6 +17,19 @@ class MyTelegramBot extends TelegramLongPollingBot {
                 if (received.equals("/turbo")) {
                     handleTurboWord();
                 }
+                switch (received) {
+                    case "/Удалите меня":
+                        if (removeMe(chatId)) {
+                            sendOneMessage(
+                                    chatId,
+                                    "Ты удален!");
+                        } else {
+                            sendOneMessage(
+                                    chatId,
+                                    "Ошибка в процессе удаления" +
+                                    "обратитесь к автору программы");
+                        }
+                }
             }
 
         }
@@ -26,6 +39,7 @@ class MyTelegramBot extends TelegramLongPollingBot {
         if (!ForBot.chatIdList.contains(chatId)) {
             if (received.equals(ForProperties.botPassword)) {
                 ForBot.chatIdList.add(chatId);
+
                 sendOneMessage(chatId, "ты добавлен!");
                 return true;
             } else {
@@ -38,6 +52,14 @@ class MyTelegramBot extends TelegramLongPollingBot {
             }
         }
         return true;
+    }
+
+    private boolean removeMe(long chatId) {
+        try {
+            return ForBot.chatIdList.remove(chatId);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private void handleTurboWord() {

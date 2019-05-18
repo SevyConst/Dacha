@@ -13,7 +13,7 @@ class Client {
 
     private int periodPingSec = PERIOD_PING_DEFAULT_SEC;
 
-    String SentStr = "ping";
+    String SentStr = "4ksqrtF";
 
     private String receivedStr;
 

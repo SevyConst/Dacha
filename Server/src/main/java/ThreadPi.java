@@ -7,6 +7,8 @@ import java.util.Date;
 
 class ThreadPi implements Runnable{
 
+    final static private String passwordClient = "4ksqrtF";
+
     Thread thrd;
 
     private Socket socketPi;
@@ -92,7 +94,7 @@ class ThreadPi implements Runnable{
             NotifyUtils.toBoth(strException, bot);
             return;
         }
-        while (input != null) {
+        while (passwordClient.equals(input)) {
             if (!isConnected) {
                 NotifyUtils.toBoth("Соединение восстановлено", bot);
                 isConnected = true;
