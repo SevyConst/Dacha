@@ -20,7 +20,7 @@ public class ForProperties {
         //String filePath = "Client/src/main/resources/config.properties";
 
         // my way
-        String filePath = "./config.properties";
+        String filePath = "/home/pi/DachaClient/config.properties";
 
         Properties prop=new Properties();
 
