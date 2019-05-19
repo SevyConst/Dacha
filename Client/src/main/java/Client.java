@@ -42,7 +42,7 @@ class Client {
                         throw new IOException();
                     }
 
-                    System.out.println("received string: " + receivedStr);
+                    //System.out.println("received string: " + receivedStr);
                     switch (receivedStr) {
                         case "turboModeOn":
                             periodPingSec = PERIOD_PING_TURBO_SEC;
