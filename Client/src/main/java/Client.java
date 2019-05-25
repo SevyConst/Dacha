@@ -13,15 +13,13 @@ class Client {
 
     private int periodPingSec = PERIOD_PING_DEFAULT_SEC;
 
-    String SentStr = "4ksqrtF";
-
     private String receivedStr;
 
     private Socket socketCloud;
     private PrintWriter out;
     private BufferedReader in;
 
-    Client(String ip, int port) {
+    Client(String ip, int port, String beginningOfTheMessage) {
         System.out.println("Ip: " + ip);
         System.out.println("Port: " + port);
 
@@ -36,7 +34,7 @@ class Client {
                         PrintWriter(socketCloud.getOutputStream(), true);
 
                 while (true) {
-                    out.println(SentStr);
+                    out.println(beginningOfTheMessage);
                     receivedStr = in.readLine();
                     if (receivedStr == null) {
                         throw new IOException();

@@ -7,12 +7,9 @@ import java.util.Date;
 
 class ThreadPi implements Runnable{
 
-    final static private String passwordClient = "4ksqrtF";
-
-    Thread thrd;
+    Thread thread;
 
     private Socket socketPi;
-    private MyTelegramBot bot;
     private int timeOutMsec;
 
     private boolean isConnected;
@@ -21,14 +18,12 @@ class ThreadPi implements Runnable{
 
 
     public ThreadPi(final Socket socketPi,
-                    final MyTelegramBot bot,
                     final int timeoutMsec) {
         this.socketPi = socketPi;
-        this.bot = bot;
         this.timeOutMsec = timeoutMsec;
 
-        thrd = new Thread(this);
-        thrd.start();
+        thread = new Thread(this);
+        thread.start();
     }
 
 
@@ -43,7 +38,7 @@ class ThreadPi implements Runnable{
             System.out.println(strException);
 
             if (isConnected) {
-                NotifyUtils.toBoth(strException, bot);
+                NotifyUtils.toBoth(strException);
             }
 
             return;
@@ -58,7 +53,7 @@ class ThreadPi implements Runnable{
                     InputStreamReader(socketPi.getInputStream()));
         } catch (IOException e) {
             strException = "Exception in socketPi.getInputStream()";
-            NotifyUtils.toBoth("strException", bot);
+            NotifyUtils.toBoth("strException");
             return;
 
         }
@@ -69,7 +64,7 @@ class ThreadPi implements Runnable{
                     socketPi.getOutputStream(),true);
         } catch (IOException e) {
             strException = "Exception in socketPi.getOutputStream()";
-            NotifyUtils.toBoth(strException, bot);
+            NotifyUtils.toBoth(strException);
             return;
         }
 
@@ -85,18 +80,18 @@ class ThreadPi implements Runnable{
                     "Exception in in.readLine() " +
                             "Timeout!" +
                             " (first attempt in the thread)";
-            NotifyUtils.toBoth(strException, bot);
+            NotifyUtils.toBoth(strException);
             return;
         } catch (IOException e) {
             strException =
                     "Exception in in.readLine() " +
                             "(first attempt in the thread)";
-            NotifyUtils.toBoth(strException, bot);
+            NotifyUtils.toBoth(strException);
             return;
         }
-        while (passwordClient.equals(input)) {
+        while (ForProperties.beginningOfMessage.equals(input)) {
             if (!isConnected) {
-                NotifyUtils.toBoth("Соединение восстановлено", bot);
+                NotifyUtils.toBoth("Соединение восстановлено");
                 isConnected = true;
             }
 
@@ -120,18 +115,18 @@ class ThreadPi implements Runnable{
                 strException =
                         "Exception in in.readLine() " +
                                 "Timeout!";
-                NotifyUtils.toBoth(strException, bot);
+                NotifyUtils.toBoth(strException);
                 return;
             } catch (IOException e) {
                 strException =
                         "Exception in in.readLine()";
-                NotifyUtils.toBoth("strException", bot);
+                NotifyUtils.toBoth("strException");
                 return;
             }
         }
-        NotifyUtils.toBoth("Соединение разорвано", bot);
-        NotifyUtils.toBoth("Некоторая информация об разрыве соединения:", bot);
-        NotifyUtils.toBoth("null from pi has been received", bot);
+        NotifyUtils.toBoth("Соединение разорвано");
+        NotifyUtils.toBoth("Некоторая информация об разрыве соединения:");
+        NotifyUtils.toBoth("null from pi has been received");
 
         try {
 
@@ -139,7 +134,7 @@ class ThreadPi implements Runnable{
             System.out.println("close socket");
         } catch (Exception e) {
             strException = "socketPi.close()";
-            NotifyUtils.toBoth(strException, bot);
+            NotifyUtils.toBoth(strException);
         }
     }
 }

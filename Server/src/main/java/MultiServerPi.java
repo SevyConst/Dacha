@@ -13,7 +13,7 @@ public class MultiServerPi {
 
     static volatile boolean turboMode = false;
 
-    public MultiServerPi(MyTelegramBot bot) {
+    public MultiServerPi() {
 
         ServerSocket serverSocketPi;
         try {
@@ -30,7 +30,6 @@ public class MultiServerPi {
                 socketPi = serverSocketPi.accept();
                 if (socketPi != null) {
                     new ThreadPi(socketPi,
-                            bot,
                             timeOutMsec);
                 }
 

@@ -5,15 +5,10 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
-
 class ForBot{
-    public MyTelegramBot bot;
-    static public ArrayList<Long> chatIdList;
+    static public MyTelegramBot bot;
 
-    ForBot() {
-        chatIdList = new ArrayList<Long>();
-
+    static boolean startBot() {
         // Initialize Api Context
         ApiContextInitializer.init();
 
@@ -26,7 +21,8 @@ class ForBot{
             botsApi.registerBot(bot);
         } catch (TelegramApiException e) {
             e.printStackTrace();
+            return false;
         }
-        System.out.println("Bot Started!");
+        return true;
     }
 }

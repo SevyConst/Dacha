@@ -9,6 +9,7 @@ public class ForProperties {
     static int port;
     static String botToken;
     static String botPassword;
+    static String beginningOfMessage;
 
     boolean loadProperties() {
 
@@ -18,10 +19,10 @@ public class ForProperties {
         //---------------------------------------------------------------------
 
         // for ide
-        //String filePath = "Server/src/main/resources/config.properties";
+        String filePath = "Server/src/main/resources/config.properties";
 
         // my way
-        String filePath = "./config.properties";
+        //String filePath = "./config.properties";
 
 
         Properties prop = new Properties();
@@ -41,6 +42,7 @@ public class ForProperties {
             botToken = prop.getProperty("BotToken");
             botPassword = prop.getProperty("BotPassword");
             port = Integer.parseInt(prop.getProperty("Port"));
+            beginningOfMessage = prop.getProperty("BeginningOfMessage");
 
             System.out.println("Port = " + port);
 

@@ -9,7 +9,7 @@ public class Main {
         System.out.println("file with config has been read successful!");
         System.out.println("------------------------------------------");
         System.out.println("start connecting!");
-        Client client = new Client(config.ip, config.port);
+        Client client = new Client(config.ip, config.port, config.beginningOfTheMessage);
         System.out.println("Done!");
     }
 }

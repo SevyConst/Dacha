@@ -1,9 +1,9 @@
 public class NotifyUtils {
-    public static void toBoth(String out, MyTelegramBot bot) {
+    public static void toBoth(String out) {
         System.out.println(out);
-        if (bot != null) {
+        if (ForBot.bot != null) {
             try {
-                bot.sendToAll(out);
+                ForBot.bot.sendToAll(out);
             } catch (Exception e) {
                 System.out.println("exception while trying send message to bot");
             }

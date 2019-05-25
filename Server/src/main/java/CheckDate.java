@@ -22,14 +22,11 @@ public class CheckDate implements Runnable {
 
     private static volatile Date dateNextToLastConnect;
 
-    private MyTelegramBot bot;
-
     private boolean warningSent = false;
 
-    CheckDate(String name, MyTelegramBot bot) {
-        this.bot = bot;
-        Thread thrd = new Thread(this, name);
-        thrd.start();
+    CheckDate(String name) {
+        Thread thread = new Thread(this, name);
+        thread.start();
     }
 
     @Override
@@ -47,7 +44,7 @@ public class CheckDate implements Runnable {
         if (firstConnectHappened) {
             Date currentDate = new Date();
             if (currentDate.getTime() < dateLastConnect.getTime()) {
-                bot.sendToAll("" +
+                ForBot.bot.sendToAll("" +
                         "currentDate.getTime() < dateLastConnect.getTime()");
                 formatAndSendTwoDates(new Date());
 
@@ -64,12 +61,12 @@ public class CheckDate implements Runnable {
 
                         String str = "Проверка: соединение разорвано!" +
                                 "Ниже некоторая служебная информация";
-                        NotifyUtils.toBoth(str, bot);
+                        NotifyUtils.toBoth(str);
                         formatAndSendTwoDates(currentDate);
 
                         str =
                                 "CheckDate: The limit has been exceeded";
-                        NotifyUtils.toBoth(str, bot);
+                        NotifyUtils.toBoth(str);
                         
                         warningSent = true;
                     }
@@ -77,7 +74,7 @@ public class CheckDate implements Runnable {
                     if (warningSent) {
                         String str =
                                 "Проверка: соединение восстановленно!";
-                        NotifyUtils.toBoth(str, bot);
+                        NotifyUtils.toBoth(str);
                         warningSent = false;
                     }
                 }
@@ -89,7 +86,7 @@ public class CheckDate implements Runnable {
             TimeUnit.SECONDS.sleep(sleepSec);
         } catch (InterruptedException e){
             String outStr = "CheckDate: Exception while sleeping";
-            NotifyUtils.toBoth(outStr, bot);
+            NotifyUtils.toBoth(outStr);
             formatAndSendTwoDates(new Date());
         }
     }
@@ -104,21 +101,21 @@ public class CheckDate implements Runnable {
 
         if (null == dateNextToLastConnect) {
             outStr = "Время предпоследнего соединения отсутствует";
-            NotifyUtils.toBoth(outStr, bot);
+            NotifyUtils.toBoth(outStr);
         }
         else {
             dateStr = dateFormat.format(dateNextToLastConnect);
             outStr = "Время предпоследнего соединения: " + dateStr;
-            NotifyUtils.toBoth(outStr, bot);
+            NotifyUtils.toBoth(outStr);
         }
 
         dateStr = dateFormat.format(dateLastConnect);
         outStr = "Время последнего соединения: " +
                 dateStr;
-        NotifyUtils.toBoth(outStr, bot);
+        NotifyUtils.toBoth(outStr);
 
         dateStr = dateFormat.format(currentDate);
         outStr = "Текущее время: " + dateStr;
-        NotifyUtils.toBoth(outStr, bot);
+        NotifyUtils.toBoth(outStr);
     }
 }

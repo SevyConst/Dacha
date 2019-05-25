@@ -8,12 +8,20 @@ public class Main {
         System.out.println("file with config has been read successful!");
         System.out.println("------------------------------------------");
 
+        if(!ForChatIDs.readPreviousChatIds()) {
+            return;
+        }
+
         // create bot
-        ForBot forBot = new ForBot();
+        if (!ForBot.startBot()) {
+            System.out.println("Can't start bot");
+            return;
+        }
+        System.out.println("Bot Started!");
 
         // creating thread for watching ping from socket-client
-        CheckDate checkDate = new CheckDate("Second check", forBot.bot);
+        CheckDate checkDate = new CheckDate("Second check");
 
-        MultiServerPi multiServerPi = new MultiServerPi(forBot.bot);
+        MultiServerPi multiServerPi = new MultiServerPi();
     }
 }

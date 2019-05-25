@@ -1,11 +1,18 @@
 .idea/
 
-out/
-config.properties
-.DS_Store
-target/
-DomovoyCloud/dependency-reduced-pom.xml
-
 Dacha.iml
 Client.iml
 Server.iml
+
+out/
+.DS_Store
+target/
+dependency-reduced-pom.xml
+
+
+
+#-----------------------------------
+# My files
+
+ChatIds.xml
+config.properties

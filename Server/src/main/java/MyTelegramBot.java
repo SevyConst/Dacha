@@ -26,8 +26,7 @@ class MyTelegramBot extends TelegramLongPollingBot {
                         } else {
                             sendOneMessage(
                                     chatId,
-                                    "Ошибка в процессе удаления" +
-                                    "обратитесь к автору программы");
+                                    "Ошибка в процессе удаления");
                         }
                 }
             }
@@ -36,10 +35,12 @@ class MyTelegramBot extends TelegramLongPollingBot {
     }
 
     private boolean isRightPassword(long chatId, String received) {
-        if (!ForBot.chatIdList.contains(chatId)) {
+        if (!ForChatIDs.chatIdList.contains(chatId)) {
             if (received.equals(ForProperties.botPassword)) {
-                ForBot.chatIdList.add(chatId);
-
+                if (!ForChatIDs.addChatId(chatId)) {
+                    sendOneMessage(chatId, "ошибка в добавлении");
+                    return false;
+                }
                 sendOneMessage(chatId, "ты добавлен!");
                 return true;
             } else {
@@ -56,7 +57,7 @@ class MyTelegramBot extends TelegramLongPollingBot {
 
     private boolean removeMe(long chatId) {
         try {
-            return ForBot.chatIdList.remove(chatId);
+            return ForChatIDs.chatIdList.remove(chatId);
         } catch (Exception e) {
             return false;
         }
@@ -88,9 +89,9 @@ class MyTelegramBot extends TelegramLongPollingBot {
     }
 
     public void sendToAll(String messageStr) {
-        if (!ForBot.chatIdList.isEmpty()) {
+        if (!ForChatIDs.chatIdList.isEmpty()) {
 
-            for (long chatId : ForBot.chatIdList) {
+            for (long chatId : ForChatIDs.chatIdList) {
                 sendOneMessage(chatId, messageStr);
             }
 

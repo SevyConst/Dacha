@@ -8,6 +8,7 @@ public class ForProperties {
 
     String ip;
     int port;
+    String beginningOfTheMessage;
 
     boolean loadProperties() {
 
@@ -17,12 +18,12 @@ public class ForProperties {
         //---------------------------------------------------------------------
 
         // for ide
-        //String filePath = "Client/src/main/resources/config.properties";
+        String filePath = "Client/src/main/resources/config.properties";
 
         // my way
-        String filePath = "/home/pi/DachaClient/config.properties";
+        //String filePath = "/home/pi/DachaClient/config.properties";
 
-        Properties prop=new Properties();
+        Properties prop = new Properties();
 
         //---------------------------------------------------------------------
 
@@ -36,11 +37,12 @@ public class ForProperties {
 
 
             // Getting properties
-            ip = prop.getProperty("ip");
+            ip = prop.getProperty("IP");
             port = Integer.parseInt(prop.getProperty("Port"));
+            beginningOfTheMessage = prop.getProperty("BeginningOfMessage");
 
             // !!!
-            //ip = "localhost";
+            ip = "localhost";
 
 
             System.out.println("ip = " + ip);
