@@ -15,23 +15,19 @@ class Client {
 
     private String receivedStr;
 
-    private Socket socketCloud;
-    private PrintWriter out;
-    private BufferedReader in;
-
     Client(String ip, int port, String beginningOfTheMessage) {
         System.out.println("Ip: " + ip);
         System.out.println("Port: " + port);
 
+        // TODO stop from command line
         while (true) {
-            try {
-                socketCloud = new Socket(ip, port);
+            try (Socket socketCloud = new Socket(ip, port);
+                 BufferedReader in = new BufferedReader(new
+                         InputStreamReader(socketCloud.getInputStream()));
+                 PrintWriter out = new
+                         PrintWriter(socketCloud.getOutputStream(), true)) {
 
-                in = new BufferedReader(new
-                        InputStreamReader(socketCloud.getInputStream()));
-
-                out = new
-                        PrintWriter(socketCloud.getOutputStream(), true);
+                socketCloud.setSoTimeout(2000);
 
                 while (true) {
                     out.println(beginningOfTheMessage);
@@ -52,33 +48,13 @@ class Client {
                     }
                     TimeUnit.SECONDS.sleep(periodPingSec);
                 }
-
-
                 // Attempt of reconnection after handling these exceptions
             } catch (InterruptedException e1) {
                 // TODO: output for client
-                closeSockets();
             } catch (IOException e2) {
-                closeSockets();
+
             }
         } // close "external" loop
-    }
-
-    // Attempt of reconnection after execution of this method - closeSockets()
-    private void closeSockets() {
-        try {
-            in.close();
-            out.close();
-            socketCloud.close();
-            TimeUnit.SECONDS.sleep(periodPingSec);
-        } catch (Exception e) {
-            System.out.println("Error in closing sockets");
-            try {
-                TimeUnit.SECONDS.sleep(periodPingSec);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }
-        }
     }
 }
 

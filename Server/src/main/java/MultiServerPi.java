@@ -1,8 +1,6 @@
-import java.io.Console;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
 public class MultiServerPi {
@@ -14,33 +12,27 @@ public class MultiServerPi {
     static volatile boolean turboMode = false;
 
     public MultiServerPi() {
+        while (ForConsole.TryingConnectPi) {
+            try (ServerSocket serverSocketPi =
+                         new ServerSocket(ForProperties.port)) {
 
-        ServerSocket serverSocketPi;
-        try {
-            serverSocketPi = new ServerSocket(ForProperties.port);
-        } catch (IOException e) {
-            System.out.println("Couldn't listen to port" + ForProperties.port);
-            return;
-        }
+                serverSocketPi.setSoTimeout(timeOutMsec);
 
-        Socket socketPi = null;
-
-        while(ForConsole.TryingConnectPi) {
-            try {
-                socketPi = serverSocketPi.accept();
-                if (socketPi != null) {
-                    new ThreadPi(socketPi,
-                            timeOutMsec);
+                while (ForConsole.TryingConnectPi) {
+                    try {
+                        Socket socketPi = serverSocketPi.accept();
+                        if (socketPi != null) {
+                            new ThreadPi(socketPi,
+                                    timeOutMsec);
+                        }
+                    } catch (SocketTimeoutException e) {}
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-            } catch (SocketTimeoutException e) {
-                System.out.println(
-                        "SocketTimeoutException while serverSocketPi.accept()");
             } catch (IOException e) {
-                System.out.println(
-                        "exception in serverSocketPi.accept()");
+                e.printStackTrace();
             }
         }
     }
-
 }
