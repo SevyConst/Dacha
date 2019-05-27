@@ -20,7 +20,7 @@ public class CheckDate implements Runnable {
 
     public static volatile Date dateLastConnect;
 
-    private static volatile Date dateNextToLastConnect;
+    public static volatile Date dateNextToLastConnect;
 
     private boolean warningSent = false;
 

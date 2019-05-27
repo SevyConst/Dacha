@@ -3,7 +3,18 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 class MyTelegramBot extends TelegramLongPollingBot {
+
+    private static final String COMMAND_TURBO = "/turbo";
+    private static final String COMMAND_REMOVE_ME = "/removeMe";
+    private static final String COMMAND_DATE_LAST_CONNECT = "/last";
+    private static final String COMMAND_NEXT_TO_LAST = "/nextToLast";
+
+    private static final String patternDate = "HH:mm:ss dd/MM";
+    private static final DateFormat dateFormat = new SimpleDateFormat(patternDate);
 
     public void onUpdateReceived(Update update) {
 
@@ -14,11 +25,12 @@ class MyTelegramBot extends TelegramLongPollingBot {
             long chatId = update.getMessage().getChatId();
 
             if (isRightPassword(chatId, received)) {
-                if (received.equals("/turbo")) {
+                if (received.equals(COMMAND_TURBO)) {
                     handleTurboWord();
                 }
                 switch (received) {
-                    case "/Удалите меня":
+                    case COMMAND_REMOVE_ME: {
+                        // TODO
                         if (removeMe(chatId)) {
                             sendOneMessage(
                                     chatId,
@@ -28,6 +40,16 @@ class MyTelegramBot extends TelegramLongPollingBot {
                                     chatId,
                                     "Ошибка в процессе удаления");
                         }
+                    } break;
+                    case COMMAND_DATE_LAST_CONNECT:
+                        sendOneMessage(chatId, dateFormat.format(CheckDate.dateLastConnect));
+                        break;
+                    case COMMAND_NEXT_TO_LAST:
+                        sendOneMessage(chatId, "last: "
+                                + dateFormat.format(CheckDate.dateLastConnect));
+                        sendOneMessage(chatId, "next to last:" +
+                                dateFormat.format(CheckDate.dateNextToLastConnect));
+                        break;
                 }
             }
 
@@ -55,6 +77,7 @@ class MyTelegramBot extends TelegramLongPollingBot {
         return true;
     }
 
+    // TODO
     private boolean removeMe(long chatId) {
         try {
             return ForChatIDs.chatIdList.remove(chatId);
