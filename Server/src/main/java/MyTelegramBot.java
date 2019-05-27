@@ -45,9 +45,9 @@ class MyTelegramBot extends TelegramLongPollingBot {
                         sendOneMessage(chatId, dateFormat.format(CheckDate.dateLastConnect));
                         break;
                     case COMMAND_NEXT_TO_LAST:
-                        sendOneMessage(chatId, "last: "
+                        sendOneMessage(chatId, "last:         "
                                 + dateFormat.format(CheckDate.dateLastConnect));
-                        sendOneMessage(chatId, "next to last:" +
+                        sendOneMessage(chatId, "next to last: " +
                                 dateFormat.format(CheckDate.dateNextToLastConnect));
                         break;
                 }
