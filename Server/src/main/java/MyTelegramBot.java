@@ -11,7 +11,6 @@ class MyTelegramBot extends TelegramLongPollingBot {
     private static final String COMMAND_TURBO = "/turbo";
     private static final String COMMAND_REMOVE_ME = "/removeMe";
     private static final String COMMAND_DATE_LAST_CONNECT = "/last";
-    private static final String COMMAND_NEXT_TO_LAST = "/nextToLast";
 
     private static final String patternDate = "HH:mm:ss dd/MM";
     private static final DateFormat dateFormat = new SimpleDateFormat(patternDate);
@@ -40,19 +39,17 @@ class MyTelegramBot extends TelegramLongPollingBot {
                                     chatId,
                                     "Ошибка в процессе удаления");
                         }
-                    } break;
-                    case COMMAND_DATE_LAST_CONNECT:
-                        sendOneMessage(chatId, dateFormat.format(CheckDate.dateLastConnect));
-                        break;
-                    case COMMAND_NEXT_TO_LAST:
+                    }
+                    break;
+                    case COMMAND_DATE_LAST_CONNECT: {
                         sendOneMessage(chatId, "last:         "
                                 + dateFormat.format(CheckDate.dateLastConnect));
                         sendOneMessage(chatId, "next to last: " +
                                 dateFormat.format(CheckDate.dateNextToLastConnect));
-                        break;
+                    }
+                    break;
                 }
             }
-
         }
     }
 
