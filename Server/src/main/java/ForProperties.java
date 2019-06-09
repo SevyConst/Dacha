@@ -10,6 +10,7 @@ public class ForProperties {
     static String botToken;
     static String botPassword;
     static String beginningOfMessage;
+    static String botUsername;
 
     boolean loadProperties() {
 
@@ -41,10 +42,15 @@ public class ForProperties {
             // Getting properties
             botToken = prop.getProperty("BotToken");
             botPassword = prop.getProperty("BotPassword");
+
             port = Integer.parseInt(prop.getProperty("Port"));
+            System.out.println("Port: " + port);
+
             beginningOfMessage = prop.getProperty("BeginningOfMessage");
 
-            System.out.println("Port = " + port);
+            botUsername = prop.getProperty("BotUsername");
+            System.out.println("bot's username: " + botUsername);
+
 
         } catch(IOException ex){
             System.out.println("Problem occurs when reading file with properties!");

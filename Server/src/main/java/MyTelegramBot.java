@@ -12,9 +12,6 @@ class MyTelegramBot extends TelegramLongPollingBot {
     private static final String COMMAND_REMOVE_ME = "/removeMe";
     private static final String COMMAND_DATE_LAST_CONNECT = "/last";
 
-    private static final String patternDate = "HH:mm:ss dd/MM";
-    private static final DateFormat dateFormat = new SimpleDateFormat(patternDate);
-
     public void onUpdateReceived(Update update) {
 
         // Check if the update has a message and the message has text
@@ -43,9 +40,11 @@ class MyTelegramBot extends TelegramLongPollingBot {
                     break;
                     case COMMAND_DATE_LAST_CONNECT: {
                         sendOneMessage(chatId, "last:         "
-                                + dateFormat.format(CheckDate.dateLastConnect));
+                                + NotifyUtils.getStringDate
+                                (CheckDate.dateLastConnect));
                         sendOneMessage(chatId, "next to last: " +
-                                dateFormat.format(CheckDate.dateNextToLastConnect));
+                                NotifyUtils.getStringDate
+                                        (CheckDate.dateNextToLastConnect));
                     }
                     break;
                 }
@@ -99,7 +98,7 @@ class MyTelegramBot extends TelegramLongPollingBot {
 
     public String getBotUsername() {
         // Return bot username
-        return "MyTelegramBot";
+        return ForProperties.botUsername;
     }
 
     @Override

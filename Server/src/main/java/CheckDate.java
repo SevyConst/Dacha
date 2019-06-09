@@ -93,8 +93,6 @@ public class CheckDate implements Runnable {
 
     // send date dateLastConnect and currentDate
     private void formatAndSendTwoDates(Date currentDate) {
-        DateFormat dateFormat = new SimpleDateFormat(
-                "E, MMM dd yyyy HH:mm:ss");
 
         String dateStr;
         String outStr;
@@ -104,17 +102,17 @@ public class CheckDate implements Runnable {
             NotifyUtils.toBoth(outStr);
         }
         else {
-            dateStr = dateFormat.format(dateNextToLastConnect);
+            dateStr = NotifyUtils.getStringDate(dateNextToLastConnect);
             outStr = "Время предпоследнего соединения: " + dateStr;
             NotifyUtils.toBoth(outStr);
         }
 
-        dateStr = dateFormat.format(dateLastConnect);
+        dateStr = NotifyUtils.getStringDate(dateLastConnect);
         outStr = "Время последнего соединения: " +
                 dateStr;
         NotifyUtils.toBoth(outStr);
 
-        dateStr = dateFormat.format(currentDate);
+        dateStr = NotifyUtils.getStringDate(currentDate);
         outStr = "Текущее время: " + dateStr;
         NotifyUtils.toBoth(outStr);
     }

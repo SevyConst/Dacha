@@ -12,6 +12,7 @@ public class Main {
             return;
         }
 
+
         // create bot
         if (!ForBot.startBot()) {
             System.out.println("Can't start bot");
