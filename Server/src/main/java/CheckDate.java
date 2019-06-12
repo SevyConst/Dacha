@@ -13,6 +13,8 @@ public class CheckDate implements Runnable {
     private final int TURBO_SEC = 1;  // period ping in the turbomode
     private int sleepSec = DEFAULT_SEC;
 
+    // when the signal from pi is absent for more than
+    // COEF*sleepSec send message to telegram bot
     private double COEF = 2;
 
     // dateLastConnect must be not null
@@ -51,6 +53,8 @@ public class CheckDate implements Runnable {
             } else {
                 int sleepMilliSec = 1000 * sleepSec;
 
+                // when the signal from pi is absent for more than
+                // COEF*sleepSec send message to telegram bot
                 double limit = dateLastConnect.getTime()
                         + sleepMilliSec * COEF;
 
@@ -59,6 +63,7 @@ public class CheckDate implements Runnable {
                 if (limitExceeded) {
                     if (!warningSent) {
 
+                        // russian language for my father
                         String str = "Проверка: соединение разорвано!" +
                                 "Ниже некоторая служебная информация";
                         NotifyUtils.toBoth(str);
