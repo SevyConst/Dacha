@@ -34,22 +34,33 @@ public class ForProperties {
 
         try(InputStream inputStream
                     = new FileInputStream(filePath))  {
-
-            // Loading the properties.
             prop.load(inputStream);
 
 
-            // Getting properties
+
+
+            // Get properties about telegram bot
+            //-----------------------------------------------------------------
+
+            // The necessary parameters for any telegram bot
             botToken = prop.getProperty("BotToken");
+            botUsername = prop.getProperty("BotUsername");
+            System.out.println("bot's username: " + botUsername);
+
+            // Parameters for my telegram bot
             botPassword = prop.getProperty("BotPassword");
+
+
+
+            // Get properties about connection with Dacha (with raspberry pi)
+            //-----------------------------------------------------------------
 
             port = Integer.parseInt(prop.getProperty("Port"));
             System.out.println("Port: " + port);
 
+            // password for connection with Dacha
             beginningOfMessage = prop.getProperty("BeginningOfMessage");
 
-            botUsername = prop.getProperty("BotUsername");
-            System.out.println("bot's username: " + botUsername);
 
 
         } catch(IOException ex){

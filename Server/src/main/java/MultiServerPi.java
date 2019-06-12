@@ -6,7 +6,7 @@ import java.net.SocketTimeoutException;
 public class MultiServerPi {
 
     // Timeout for Pi connection in milliseconds
-    // TODO: change by option in telegram?
+    // TODO: change by option from telegram?
     private int timeOutMsec = 15 * 1000;
 
     static volatile boolean turboMode = false;
@@ -22,6 +22,9 @@ public class MultiServerPi {
                     try {
                         Socket socketPi = serverSocketPi.accept();
                         if (socketPi != null) {
+
+                            // receive and send message from Dacha
+                            // (from raspberry pi)
                             new ThreadPi(socketPi,
                                     timeOutMsec);
                         }

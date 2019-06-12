@@ -15,9 +15,6 @@ class ThreadPi implements Runnable{
 
     private boolean isConnected;
 
-    String strException;
-
-
     public ThreadPi(final Socket socketPi,
                     final int timeoutMsec) {
         this.socketPi = socketPi;
@@ -43,20 +40,36 @@ class ThreadPi implements Runnable{
             }
         }
 
+        // the main activity
+        recieveAndSend();
 
+    }
+
+
+    // - Receive message from raspberry pi (from Dacha);
+    // - Make sure that this is the message that we are waiting for;
+    // - Send answer to pi;
+    private void recieveAndSend() {
         try (BufferedReader in = new BufferedReader(new
                 InputStreamReader(socketPi.getInputStream()));
              PrintWriter out = new PrintWriter(
                      socketPi.getOutputStream(), true)) {
 
-
-            //-----------------------------------------------------------
-            // Receive and send
+            // Receive message
             String input = null;
-                input = in.readLine();
+            input = in.readLine();
+
+            // Make sure that this is the message that we are waiting for
+            //
+            // the variable was named beginningOfMessage (not a message)
+            // because I will add some information to message later (TODO)
+            // Also some information about current state of pi as
+            // temperature, free memory and etc.
+            //
+            // variable beginningOfMessage is
+            // the password for connection with Dacha
             while (ForProperties.beginningOfMessage.equals(input)) {
                 if (!isConnected) {
-                    NotifyUtils.toBoth("Соединение восстановлено");
                     isConnected = true;
                 }
 
@@ -66,8 +79,10 @@ class ThreadPi implements Runnable{
                 }
 
                 // TODO: read about multithreading and the one resource
+                // (System.out is the one resource)
                 System.out.println(input);
 
+                // send answer to pi
                 if (MultiServerPi.turboMode) {
                     out.println("turboModeOn");
                 } else {
