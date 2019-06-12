@@ -41,10 +41,6 @@ public class ForProperties {
             port = Integer.parseInt(prop.getProperty("Port"));
             beginningOfTheMessage = prop.getProperty("BeginningOfMessage");
 
-            // !!!
-            ip = "localhost";
-
-
             System.out.println("ip = " + ip);
             System.out.println("Port = " + port);
 
