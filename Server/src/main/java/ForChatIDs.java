@@ -12,6 +12,13 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ *
+ * TODO: substitute XML with database
+ *  for simultaneous handling some users of telegram bot
+ *
+ */
+
 public class ForChatIDs {
 
     static List<Long> chatIdList = new ArrayList<>();
@@ -107,9 +114,9 @@ public class ForChatIDs {
         return true;
     }
 
-    public static boolean removeChatId(Long chatId) {
-        Node root = doc.getFirstChild();
-        return true;
-    }
+    // TODO: write!
+//    public static boolean removeChatId(Long chatId) {
+//        return true;
+//    }
 }
 

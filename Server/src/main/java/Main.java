@@ -10,6 +10,7 @@ public class Main {
         System.out.println("------------------------------------------");
 
         // read XML
+        // TODO: substitute XML with database
         if(!ForChatIDs.readPreviousChatIds()) {
             return;
         }

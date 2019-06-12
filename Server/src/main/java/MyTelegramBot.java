@@ -3,13 +3,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 class MyTelegramBot extends TelegramLongPollingBot {
 
     private static final String COMMAND_TURBO = "/turbo";
-    private static final String COMMAND_REMOVE_ME = "/removeMe";
+    //private static final String COMMAND_REMOVE_ME = "/removeMe";
     private static final String COMMAND_DATE_LAST_CONNECT = "/last";
 
     public void onUpdateReceived(Update update) {
@@ -20,24 +17,27 @@ class MyTelegramBot extends TelegramLongPollingBot {
 
             long chatId = update.getMessage().getChatId();
 
+            // send answer only if user signed in.
             if (isRightPassword(chatId, received)) {
+
                 if (received.equals(COMMAND_TURBO)) {
-                    handleTurboWord();
+                    handleTurbo();
                 }
                 switch (received) {
-                    case COMMAND_REMOVE_ME: {
-                        // TODO
-                        if (removeMe(chatId)) {
-                            sendOneMessage(
-                                    chatId,
-                                    "Ты удален!");
-                        } else {
-                            sendOneMessage(
-                                    chatId,
-                                    "Ошибка в процессе удаления");
-                        }
-                    }
-                    break;
+                    // TODO write
+//                    case COMMAND_REMOVE_ME: {
+//                        // TODO
+//                        if (removeMe(chatId)) {
+//                            sendOneMessage(
+//                                    chatId,
+//                                    "Ты удален!");
+//                        } else {
+//                            sendOneMessage(
+//                                    chatId,
+//                                    "Ошибка в процессе удаления");
+//                        }
+//                    }
+//                    break;
                     case COMMAND_DATE_LAST_CONNECT: {
                         sendOneMessage(chatId, "last:         "
                                 + NotifyUtils.getStringDate
@@ -74,15 +74,15 @@ class MyTelegramBot extends TelegramLongPollingBot {
     }
 
     // TODO
-    private boolean removeMe(long chatId) {
-        try {
-            return ForChatIDs.chatIdList.remove(chatId);
-        } catch (Exception e) {
-            return false;
-        }
-    }
+//    private boolean removeMe(long chatId) {
+//        try {
+//            return ForChatIDs.chatIdList.remove(chatId);
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
 
-    private void handleTurboWord() {
+    private void handleTurbo() {
         if (MultiServerPi.turboMode) {
             MultiServerPi.turboMode = false;
             sendToAll("Turbo mode off");
