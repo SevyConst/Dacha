@@ -80,7 +80,7 @@ class ThreadPi implements Runnable{
 
                 // TODO: read about multithreading and the one resource
                 // (System.out is the one resource)
-                System.out.println(input);
+                //System.out.println(input);
 
                 // send answer to pi
                 if (MultiServerPi.turboMode) {
